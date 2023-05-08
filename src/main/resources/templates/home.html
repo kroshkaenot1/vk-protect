@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>ScoreBoard</title>
 </head>
 <header>
     <h2>Здравствуйте, <span th:text="${#httpServletRequest.remoteUser}"></span></h2>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/admin">Панель администратора</a>
     <a href="/logout">Выйти из учетной записи</a>
 </header>
 <body>
@@ -27,5 +28,6 @@
         </tbody>
     </table>
 </div>
+
 </body>
 </html>

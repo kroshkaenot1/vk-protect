@@ -1,5 +1,6 @@
 package com.scoreboard.vk.protect.config;
 
+import com.scoreboard.vk.protect.models.Role;
 import com.scoreboard.vk.protect.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/public/**").permitAll()
+                .antMatchers("/admin").hasAnyAuthority(Role.ADMIN.getAuthority())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()

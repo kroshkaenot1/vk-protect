@@ -1,9 +1,7 @@
 package com.scoreboard.vk.protect.services;
 
-import com.scoreboard.vk.protect.models.Category;
 import com.scoreboard.vk.protect.models.Rating;
 import com.scoreboard.vk.protect.models.User;
-import com.scoreboard.vk.protect.repos.CategoryRepository;
 import com.scoreboard.vk.protect.repos.RatingRepository;
 import com.scoreboard.vk.protect.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,6 @@ import java.util.Map;
 public class UserService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    CategoryRepository categoryRepository;
     @Autowired
     RatingRepository ratingRepository;
     @Override
@@ -51,7 +47,10 @@ public class UserService implements UserDetailsService {
             comparativeScore.put(rating.getCategory().getName(),compScore);
         }
         result.put("Рейтинг по отношению к общему количеству задач",generalScore);
-        result.put("Рейтинг среди пользователей",comparativeScore);
+        result.put("Рейтинг среди сотрудников",comparativeScore);
         return result;
+    }
+    public Iterable<User> getAllUsers(){
+        return userRepository.findAll();
     }
 }

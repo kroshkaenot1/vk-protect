@@ -13,7 +13,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
-
 @Component
 public class DatabaseInitializer implements ApplicationRunner {
     @Autowired
@@ -27,7 +26,7 @@ public class DatabaseInitializer implements ApplicationRunner {
         if(userRepository.findByUsername("user1") == null && userRepository.findByUsername("admin") == null){
             User user1 = new User("user","user",Collections.singleton(Role.USER));
             User user2 = new User("admin","admin",Collections.singleton(Role.ADMIN));
-            User user3 = new User("user1","user",Collections.singleton(Role.USER));
+            User user3 = new User("user1","user1",Collections.singleton(Role.USER));
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);
@@ -47,7 +46,7 @@ public class DatabaseInitializer implements ApplicationRunner {
             ratingRepository.save(new Rating(user2,category2,4L));
             ratingRepository.save(new Rating(user2,category3,25L));
 
-            ratingRepository.save(new Rating(user2,category1,30L));
+            ratingRepository.save(new Rating(user3,category1,30L));
             ratingRepository.save(new Rating(user3,category2,1L));
             ratingRepository.save(new Rating(user3,category3,30L));
         }

@@ -17,4 +17,9 @@ public class MainController {
         model.addAttribute("scoreResults", userService.getProgress(userDetails.getUsername()));
         return "home";
     }
+    @GetMapping(value = "/admin")
+    public String getAdminPanel(Model model){
+        model.addAttribute("users",userService.getAllUsers());
+        return "admin";
+    }
 }

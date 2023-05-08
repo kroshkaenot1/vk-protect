@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: scoreboard
+    ports:
+      - 3307:3306
+    restart: on-failure
+  appl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 9090:8080
+    depends_on:
+      - mysqldb
+    restart: always

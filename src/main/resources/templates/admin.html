@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+</head>
+<header>
+  <h2>Здравствуйте, <span th:text="${#httpServletRequest.remoteUser}"></span></h2>
+  <a href="/">Рейтинг</a>
+  <a href="/logout">Выйти из учетной записи</a>
+</header>
+<body>
+<div> Пользователи:
+  <ul>
+    <li th:each="user : ${users}" th:text="${user.getUsername()}"></li>
+  </ul>
+</div>
+</body>
+</html>
