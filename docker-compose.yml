@@ -28,6 +28,5 @@ services:
     depends_on:
       - mysqldb
     restart: always
-
 networks:
   springNetwork:
