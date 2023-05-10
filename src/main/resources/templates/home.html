@@ -3,31 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>ScoreBoard</title>
+    <style type="text/css">
+    table{
+        padding: 3px;
+        border-collapse:collapse; }
+    td,th{
+        border: 1px solid black; }
+    </style>
 </head>
 <header>
     <h2>Здравствуйте, <span th:text="${#httpServletRequest.remoteUser}"></span></h2>
-    <a sec:authorize="hasAuthority('ADMIN')" href="/admin">Панель администратора</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/admin">Панель администратора</a><br>
     <a href="/logout">Выйти из учетной записи</a>
 </header>
 <body>
 <h1>Ваш рейтинг по решению задач:</h1>
-<div th:each="category : ${scoreResults}">
-    <table>
-        <h2 th:text="${category.key}"></h2>
-        <thead>
-        <tr>
-            <th>Категория задач:</th>
-            <th>Ваш рейтинг:</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="score : ${category.value}">
-            <td th:text="${score.key}"></td>
-            <td th:text="${score.value}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<table>
+    <thead>
+    <tr>
+        <th>Категория задач</th>
+        <th>Рейтинг по отношению<br> к общему количеству задач</th>
+        <th>Рейтинг по отношению<br> к другим сотрудникам</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr th:each="userRating : ${userRatings}">
+        <td th:text="${userRating.getCategoryName()}"></td>
+        <td th:text="${userRating.getCompletedTasks()} +'/'+ ${userRating.getCountOfTasks()}"></td>
+        <td th:text="${userRating.getPosition()} +'/'+ ${userRating.getCountOfUsers()}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

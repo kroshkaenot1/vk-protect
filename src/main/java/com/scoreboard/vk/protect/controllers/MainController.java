@@ -14,7 +14,7 @@ public class MainController {
     UserService userService;
     @GetMapping(value = "/")
     public String getHome(@AuthenticationPrincipal UserDetails userDetails, Model model){
-        model.addAttribute("scoreResults", userService.getProgress(userDetails.getUsername()));
+        model.addAttribute("userRatings", userService.getProgress(userDetails.getUsername()));
         return "home";
     }
     @GetMapping(value = "/admin")
